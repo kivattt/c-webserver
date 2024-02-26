@@ -107,8 +107,10 @@ void *handle_connection(void *args) {
 		return 0;
 	}
 
-	struct HTTPRequest request = get_parsed_request(buffer);
-	printf("Method found: %s\n", request.method);
+	struct HTTPRequest request = parse_request(buffer);
+	printf("Method: %s\n", request.method);
+	printf("HTTP Version: %s\n", request.httpVersion);
+	printf("URI: %s\n", request.uri.path);
 
 //	printf("Got data: %s\n", buffer);
 

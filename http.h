@@ -1,6 +1,8 @@
 #ifndef HTTP_H
 #define HTTP_H
 
+#include <stddef.h>
+
 struct StrPair {
 	char *key;
 	char *value;
@@ -9,6 +11,8 @@ struct StrPair {
 struct StrMap{
 	struct StrPair *array;
 };
+
+char *map_value_from_key(struct StrMap map, const size_t mapSize, const char *key);
 
 struct URI{
 	char *path;
@@ -30,6 +34,9 @@ struct HTTPResponse {
 	char *body;
 };
 
-struct HTTPRequest get_parsed_request(const char *request);
+struct HTTPRequest parse_request(char *request);
+struct URI parse_uri(const char *uri);
+char *parse_percent_encoding(const char *input);
+struct StrMap parse_urlencoded(const char *urlEncoded);
 
 #endif // HTTP_H
